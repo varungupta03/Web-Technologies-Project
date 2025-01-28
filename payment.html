@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="paymentApp">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RazorPay</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;400&display=swap" rel="stylesheet" />
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="payment.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="PaymentController as paymentCtrl">
+<header>
+    <div class="container">
+        <div class="left">
+            <h3>BILLING ADDRESS</h3>
+            <form name="billingForm" ng-submit="paymentCtrl.submitForm(billingForm.$valid)">
+                <label>Full name</label>
+                <input type="text" name="fullName" placeholder="Enter name" ng-model="paymentCtrl.fullName" required>
+                <label>Email Address</label>
+                <input type="text" name="address" placeholder="Enter address" ng-model="paymentCtrl.address" required>
+                <label>City</label>
+                <input type="text" name="city" placeholder="Enter City" ng-model="paymentCtrl.city" required>
+                <label>State</label>
+                <input type="text" name="state" placeholder="Enter State" ng-model="paymentCtrl.state" required>
+                <label>Pin code</label>
+                <input type="text" name="zipCode" placeholder="Zip code" ng-model="paymentCtrl.zipCode" required>
+            </form>
+        </div>
+        <div class="right">
+            <h3>PAYMENT</h3>
+            <form name="paymentForm" ng-submit="paymentCtrl.submitForm(paymentForm.$valid)">
+                Accepted Card <br>
+                <img src="image/card1.png" width="100">
+                <img src="image/card2.png" width="50">
+                <br><br>
+                Card number
+                <input type="text" name="cardNumber" placeholder="Enter card number" ng-model="paymentCtrl.cardNumber" required>
+                Exp month
+                <input type="text" name="expMonth" placeholder="Enter Month" ng-model="paymentCtrl.expMonth" required>
+                <div id="zip">
+                    <label>
+                        Exp year
+                        <input type="text" name="expYear" placeholder="Enter Year" ng-model="paymentCtrl.expYear" required>
+                    </label>
+                    <label>
+                        CVV
+                        <input type="text" name="cvv" placeholder="CVV" ng-model="paymentCtrl.cvv" required>
+                    </label>
+                </div>
+                    <input type="submit" value="Proceed to Checkout" ng-disabled="billingForm.$invalid || paymentForm.$invalid">
+            </form>
+        </div>xs
+    </div>
+</header>
+<script>
+    angular.module('paymentApp', [])
+        .controller('PaymentController', function () {
+            var vm = this;
+            vm.submitForm = function (isValid) {
+                if (isValid) {
+                    onclick = window.location.href = "otp.html";
+                }
+				else {
+                    window.alert("Please fill all the fields");
+                }
+            };
+        });
+</script>
+</body>
+</html>
